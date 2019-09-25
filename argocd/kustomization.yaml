@@ -5,6 +5,6 @@ bases:
 - github.com/argoproj/argo-cd//manifests/cluster-install?ref=v1.2.2
 
 patchesStrategicMerge:
-- argocd/argocd-cm.yaml
+- argocd-cm.yaml
 
 namespace: argocd
