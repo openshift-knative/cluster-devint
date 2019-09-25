@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster_setup
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: argocd
+  project: default
+  source:
+    path: cluster_setup
+    repoURL: https://github.com/openshift-knative/cluster-devint
+    targetRevision: master
+  syncPolicy:
+    automated: {}
