@@ -47,8 +47,7 @@ oc apply -f https://raw.githubusercontent.com/openshift-knative/cluster-devint/c
 ### Verify the cluster-setup application synced successfully
 ```
 oc port-forward svc/argocd-server -n argocd 8080:443
-oc get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name | cut -d'/' -f 2
-argocd login localhost:8080 # user admin and password from previous command
+argocd login localhost:8080 --insecure --username admin --password $(oc get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name | cut -d'/' -f 2)
 
 # make sure health status is healthy and sync status is synced
 argocd app get cluster-setup
