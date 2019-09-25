@@ -15,6 +15,4 @@ spec:
     repoURL: https://github.com/openshift-knative/cluster-devint
     targetRevision: master
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+    automated: {}
