@@ -5,4 +5,4 @@ metadata:
   namespace: openshift-marketplace
 spec:
   targetNamespace: openshift-operators 
-  packages: elasticsearch-operator
+  packages: elasticsearch-operator,jaeger-product
