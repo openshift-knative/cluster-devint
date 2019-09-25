@@ -1,10 +1,24 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-
-bases:
-- github.com/argoproj/argo-cd//manifests/cluster-install?ref=v1.2.2
-
-patchesStrategicMerge:
-- argocd/argocd-cm.yaml
-
-namespace: argocd
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+data:
+  resources.customizations: |
+    operators.coreos.com/CatalogSourceConfig:
+      health.lua: |
+        hs = {}
+        if obj.status ~= nil then
+          if obj.status.currentPhase ~= nil then
+            if obj.status.currentPhase.phase ~= nil then
+              hs.status = "Progressing"
+              hs.message = obj.status.currentPhase.phase.message
+              if obj.status.currentPhase.phase.name == "Succeeded" then
+                hs.status = "Healthy"
+              end
+              return hs
+            end
+          end
+        end
+        hs.status = "Progressing"
+        hs.message = "Waiting for catalog source config"
+        return hs
