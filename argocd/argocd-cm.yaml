@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: argocd-cm
 data:
-  resources.customizations: |
+  resource.customizations: |
     operators.coreos.com/CatalogSourceConfig:
       health.lua: |
         hs = {}
