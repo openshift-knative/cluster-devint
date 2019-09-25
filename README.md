@@ -41,7 +41,7 @@ download the argocd CLI from https://github.com/argoproj/argo-cd/releases/tag/v1
 
 ## Create the cluster-setup application to seed the cluster
 ```
-oc apply -f https://raw.githubusercontent.com/openshift-knative/cluster-devint/f9940c1ff0768010a02bc53034eef5dc1a64cbee/seed.yaml
+oc apply -f https://raw.githubusercontent.com/openshift-knative/cluster-devint/c216b1ea884f0ff9dd9e91635d81c5c5ee35c285/seed.yaml
 ```
 
 ### Verify the cluster-setup application synced successfully
