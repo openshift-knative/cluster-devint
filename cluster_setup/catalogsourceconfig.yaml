@@ -3,6 +3,8 @@ kind: CatalogSourceConfig
 metadata:
   name: devint-operators
   namespace: openshift-marketplace
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   targetNamespace: openshift-operators 
   packages: elasticsearch-operator,jaeger-product,kiali-ossm,servicemeshoperator,serverless-operator
