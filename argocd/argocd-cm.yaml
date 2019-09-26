@@ -35,3 +35,16 @@ data:
         hs.status = "Progressing"
         hs.message = "Waiting for subscription"
         return hs
+    maistra.io/ServiceMeshMemberRoll:
+      health.lua: |
+        hs = {}
+        if obj.status ~= nil then
+          if obj.status.configuredMembers ~= nil then
+            hs.status = "Healthy"
+            hs.message = ""
+            return hs
+          end
+        end
+        hs.status = "Progressing"
+        hs.message = "Waiting for service mesh member roll"
+        return hs
