@@ -1,12 +1,14 @@
 # DevInt Cluster Creation
 
 ## Configure AWS CLI to use installer IAM credentials
+
+```
 aws configure --profile openshiftknativedemo-installer
 AWS Access Key ID [None]: *****
 AWS Secret Access Key [None]: *****
 Default region name [None]: us-west-2
 Default output format [None]:
-
+```
 
 ## Create cluster
 using openshift-install 4.1.16
