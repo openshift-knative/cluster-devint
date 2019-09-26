@@ -1,7 +1,6 @@
 # DevInt Cluster Creation
 
 ## Configure AWS CLI to use installer IAM credentials
-
 ```
 aws configure --profile openshiftknativedemo-installer
 AWS Access Key ID [None]: *****
@@ -11,7 +10,7 @@ Default output format [None]:
 ```
 
 ## Create cluster
-using openshift-install 4.1.16
+Using openshift-install 4.1.16, create the install config:
 
 ```
 mkdir -p ~/Documents/openshift_clusters
@@ -22,10 +21,15 @@ export AWS_PROFILE=openshiftknativedemo-installer
 openshift-install create install-config --dir devint-openshiftknativedemo
 ```
 
-for both controlplane and compute set instance size to m5.xlarge
+For both control plane and compute nodes, set instance size to m5.xlarge:
+
+```
   platform:
     aws:
       type: m5.xlarge
+```
+
+Now actually create the cluster:
 
 ```
 openshift-install create cluster --dir devint-openshiftknativedemo --log-level info
