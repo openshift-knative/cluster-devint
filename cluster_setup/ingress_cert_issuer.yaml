@@ -119,4 +119,11 @@ spec:
           name: letsencrypt-issuer-volume
       restartPolicy: Never
 ---
-
+apiVersion: operator.openshift.io/v1
+kind: IngressController
+metadata:
+  name: default
+  namespace: openshift-ingress-operator
+spec:
+  defaultCertificate:
+    name: letsencrypt-issuer
