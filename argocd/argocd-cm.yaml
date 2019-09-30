@@ -69,7 +69,7 @@ data:
       health.lua: |
         hs = {}
         if obj.status ~= nil then
-          if obj.status.provisioned == "true"
+          if obj.status.provisioned then
             hs.status = "Healthy"
             hs.message = ""
             return hs
