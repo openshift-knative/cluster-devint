@@ -65,3 +65,16 @@ data:
         hs.status = "Progressing"
         hs.message = "Waiting for knative serving"
         return hs
+    cloudcredential.openshift.io/CredentialsRequest:
+      health.lua: |
+        hs = {}
+        if obj.status ~= nil then
+          if obj.status.provisioned
+            hs.status = "Healthy"
+            hs.message = ""
+            return hs
+          end
+        end
+        hs.status = "Progressing"
+        hs.message = "Waiting for credentials request"
+        return hs

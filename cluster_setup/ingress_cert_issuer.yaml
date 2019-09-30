@@ -1,0 +1,118 @@
+apiVersion: cloudcredential.openshift.io/v1
+kind: CredentialsRequest
+metadata:
+  name: letsencrypt-issuer
+  namespace: openshift-cloud-credential-operator
+spec:
+  providerSpec:
+    apiVersion: cloudcredential.openshift.io/v1
+    kind: AWSProviderSpec
+    statementEntries:
+    - action:
+      - route53:GetChange
+      - route53:ListHostedZonesByName
+      - route53:ChangeResourceRecordSets
+      effect: Allow
+      resource: '*'
+  secretRef:
+    name: letsencrypt-issuer-cloud-credentials
+    namespace: openshift-ingress
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: letsencrypt-issuer
+  namespace: openshift-ingress
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: openshift-ingress-letsencrypt-issuer
+rules:
+- apiGroups:
+  - '*'
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- nonResourceURLs:
+  - '*'
+  verbs:
+  - '*'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: openshift-ingress-letsencrypt-issuer
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: openshift-ingress-letsencrypt-issuer
+subjects:
+- kind: ServiceAccount
+  name: letsencrypt-issuer
+  namespace: openshift-ingress
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: letsencrypt-issuer-volume
+  namespace: openshift-ingress
+data:
+  issuer.yaml: |-
+    apiVersion: certmanager.k8s.io/v1alpha1
+    kind: Issuer
+    metadata:
+      name: letsencrypt-issuer
+      namespace: openshift-ingress
+    spec:
+      acme:
+        server: https://acme-v02.api.letsencrypt.org/directory
+        email: bbrownin@redhat.com
+        privateKeySecretRef:
+          name: letsencrypt-issuer
+        solvers:
+        - selector:
+            dnsZones:
+            - "<DOMAIN>"
+          dns01:
+            route53:
+              region: us-west-2
+              accessKeyID: "<AWS_ACCESS_KEY>"
+              secretAccessKeySecretRef:
+                name: letsencrypt-issuer-cloud-credentials
+                key: aws_secret_access_key
+  create_issuer.sh: |-
+    DOMAIN=$(oc get ingress.config.openshift.io cluster -o jsonpath='{.spec.domain}')
+    if [ "$DOMAIN" == "" ]; then exit 1; fi
+    AWS_ACCESS_KEY=$(oc get secret -n openshift-ingress letsencrypt-issuer-cloud-credentials -o jsonpath='{.data.aws_access_key_id}')
+    if [ "$AWS_ACCESS_KEY" == "" ]; then exit 1; fi
+    cat issuer.yaml | sed -e "s/<DOMAIN>/$DOMAIN/" -e "s/<ACCESS_KEY>/$AWS_ACCESS_KEY/" | oc create -f -
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: create-letsencrypt-issuer
+  namespace: openshift-ingress
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  template:
+    spec:
+      serviceAccountName: letsencrypt-issuer
+      containers:
+      - name: oc
+        image: quay.io/openshift-pipeline/openshift-cli:0.6.0
+        command: ["cd /opt/issuer && ./create_issuer.sh"]
+        volumeMounts:
+        - name: issuer-volume
+          mountPath: /opt/issuer
+          readOnly: true
+      volumes:
+      - name: issuer-volume
+        configMap:
+          defaultMode: 0700
+          name: letsencrypt-issuer-volume
+      restartPolicy: Never
+---
+
