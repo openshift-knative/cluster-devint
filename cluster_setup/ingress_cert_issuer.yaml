@@ -87,7 +87,7 @@ data:
     if [ "$DOMAIN" == "" ]; then exit 1; fi
     AWS_ACCESS_KEY=$(oc get secret -n openshift-ingress letsencrypt-issuer-cloud-credentials -o jsonpath='{.data.aws_access_key_id}')
     if [ "$AWS_ACCESS_KEY" == "" ]; then exit 1; fi
-    cat issuer.yaml | sed -e "s/<DOMAIN>/$DOMAIN/" -e "s/<ACCESS_KEY>/$AWS_ACCESS_KEY/" | oc create -f -
+    cat issuer.yaml | sed -e "s/<DOMAIN>/$DOMAIN/" -e "s/<AWS_ACCESS_KEY>/$AWS_ACCESS_KEY/" | oc apply -f -
 ---
 apiVersion: batch/v1
 kind: Job
