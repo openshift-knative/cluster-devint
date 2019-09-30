@@ -103,7 +103,9 @@ spec:
       containers:
       - name: oc
         image: quay.io/openshift-pipeline/openshift-cli:0.6.0
-        command: ["cd /opt/issuer && ./create_issuer.sh"]
+        command: ["/bin/sh", "-c"]
+        args:
+        - cd /opt/issuer && ./create_issuer.sh
         volumeMounts:
         - name: issuer-volume
           mountPath: /opt/issuer
