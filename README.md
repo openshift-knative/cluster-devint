@@ -35,6 +35,22 @@ Now actually create the cluster:
 openshift-install create cluster --dir devint-openshiftknativedemo --log-level info
 ```
 
+## Populate Secrets
+Download bitwarden CLI from https://help.bitwarden.com/article/cli/#download--install
+
+Login to bitwarden the first time you use it:
+```
+bw login username@company.com password
+```
+
+Unlock the session and optionally pull the latest secrets if things have changed
+```
+export BW_SESSION=$(bw unlock password --raw)
+bw sync # only needed if secrets updated server-side
+./populate-secrets-from-bitwarden.sh
+```
+
+
 
 ## Install Argo CD
 ```
