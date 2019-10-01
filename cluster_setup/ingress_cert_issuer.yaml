@@ -79,6 +79,7 @@ data:
           dns01:
             route53:
               region: us-west-2
+              hostedZoneID: "<ZONE>"
               accessKeyID: "<AWS_ACCESS_KEY>"
               secretAccessKeySecretRef:
                 name: letsencrypt-issuer-cloud-credentials
@@ -100,9 +101,11 @@ data:
   create_issuer.sh: |-
     DOMAIN=$(oc get ingress.config.openshift.io cluster -o jsonpath='{.spec.domain}')
     if [ "$DOMAIN" == "" ]; then exit 1; fi
+    ZONE=$(oc get dns cluster -o jsonpath="{.spec.publicZone.id}")
+    if [ "$ZONE" == "" ]; then exit 1; fi
     AWS_ACCESS_KEY=$(oc get secret -n openshift-ingress letsencrypt-issuer-cloud-credentials -o jsonpath='{.data.aws_access_key_id}' | base64 -d)
     if [ "$AWS_ACCESS_KEY" == "" ]; then exit 1; fi
-    cat issuer.yaml | sed -e "s/<DOMAIN>/$DOMAIN/" -e "s/<AWS_ACCESS_KEY>/$AWS_ACCESS_KEY/" | oc apply -f -
+    cat issuer.yaml | sed -e "s/<DOMAIN>/$DOMAIN/" -e "s/<ZONE>/$ZONE/" -e "s/<AWS_ACCESS_KEY>/$AWS_ACCESS_KEY/" | oc apply -f -
     cat certificate.yaml | sed -e "s/<DOMAIN>/$DOMAIN/" -e "s/<AWS_ACCESS_KEY>/$AWS_ACCESS_KEY/" | oc apply -f -
 ---
 apiVersion: batch/v1
