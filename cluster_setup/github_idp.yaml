@@ -1,0 +1,17 @@
+apiVersion: config.openshift.io/v1
+kind: OAuth
+metadata:
+  name: cluster
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+spec:
+  identityProviders:
+  - name: github
+    mappingMethod: claim
+    type: GitHub
+    github:
+      clientID: 8e0b9dfac16e8f592247
+      clientSecret:
+        name: github-oauth-secret
+      teams:
+      - openshift-knative/cluster-devint
