@@ -82,12 +82,30 @@ data:
               secretAccessKeySecretRef:
                 name: letsencrypt-issuer-cloud-credentials
                 key: aws_secret_access_key
+  certificate.yaml: |-
+    apiVersion: certmanager.k8s.io/v1alpha1
+    kind: Certificate
+    metadata:
+      name: letsencrypt-cert
+      namespace: openshift-ingress
+    spec:
+      secretName: letsencrypt-tls
+      duration: 2160h # 90d
+      renewBefore: 360h # 15d
+      commonName: "<DOMAIN>"
+      dnsNames:
+      - "<DOMAIN>"
+      - "*.<DOMAIN>"
+      issuerRef:
+        name: letsencrypt-issuer
+        kind: Issuer
   create_issuer.sh: |-
     DOMAIN=$(oc get ingress.config.openshift.io cluster -o jsonpath='{.spec.domain}')
     if [ "$DOMAIN" == "" ]; then exit 1; fi
     AWS_ACCESS_KEY=$(oc get secret -n openshift-ingress letsencrypt-issuer-cloud-credentials -o jsonpath='{.data.aws_access_key_id}')
     if [ "$AWS_ACCESS_KEY" == "" ]; then exit 1; fi
     cat issuer.yaml | sed -e "s/<DOMAIN>/$DOMAIN/" -e "s/<AWS_ACCESS_KEY>/$AWS_ACCESS_KEY/" | oc apply -f -
+    cat certificate.yaml | sed -e "s/<DOMAIN>/$DOMAIN/" -e "s/<AWS_ACCESS_KEY>/$AWS_ACCESS_KEY/" | oc apply -f -
 ---
 apiVersion: batch/v1
 kind: Job
@@ -124,6 +142,8 @@ kind: IngressController
 metadata:
   name: default
   namespace: openshift-ingress-operator
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
 spec:
   defaultCertificate:
-    name: letsencrypt-issuer
+    name: letsencrypt-tls
