@@ -101,7 +101,7 @@ data:
   create_issuer.sh: |-
     DOMAIN=$(oc get ingress.config.openshift.io cluster -o jsonpath='{.spec.domain}')
     if [ "$DOMAIN" == "" ]; then exit 1; fi
-    AWS_ACCESS_KEY=$(oc get secret -n openshift-ingress letsencrypt-issuer-cloud-credentials -o jsonpath='{.data.aws_access_key_id}')
+    AWS_ACCESS_KEY=$(oc get secret -n openshift-ingress letsencrypt-issuer-cloud-credentials -o jsonpath='{.data.aws_access_key_id}' | base64 -d)
     if [ "$AWS_ACCESS_KEY" == "" ]; then exit 1; fi
     cat issuer.yaml | sed -e "s/<DOMAIN>/$DOMAIN/" -e "s/<AWS_ACCESS_KEY>/$AWS_ACCESS_KEY/" | oc apply -f -
     cat certificate.yaml | sed -e "s/<DOMAIN>/$DOMAIN/" -e "s/<AWS_ACCESS_KEY>/$AWS_ACCESS_KEY/" | oc apply -f -
