@@ -7,4 +7,4 @@ metadata:
     argocd.argoproj.io/sync-wave: "1"
 spec:
   targetNamespace: openshift-operators 
-  packages: elasticsearch-operator,jaeger-product,kiali-ossm,servicemeshoperator,serverless-operator,amq7-cert-manager
+  packages: elasticsearch-operator,jaeger-product,kiali-ossm,servicemeshoperator,serverless-operator
