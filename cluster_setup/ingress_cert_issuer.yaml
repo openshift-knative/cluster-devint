@@ -91,9 +91,8 @@ data:
       namespace: openshift-ingress
     spec:
       secretName: letsencrypt-tls
-      commonName: "<DOMAIN>"
+      commonName: "*.<DOMAIN>"
       dnsNames:
-      - "<DOMAIN>"
       - "*.<DOMAIN>"
       issuerRef:
         name: letsencrypt-issuer
