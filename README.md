@@ -1,3 +1,16 @@
+# Logging in to DevInt Cluster
+
+Make sure your GitHub user is a member of the
+openshift-knative/cluster-devint team at
+https://github.com/orgs/openshift-knative/teams/cluster-devint. Ping
+another member of that team to be added if you're not part of
+it.
+
+Go to
+https://console-openshift-console.apps.devint.openshiftknativedemo.org
+and choose the `github` identity provider. Do the login dance with
+your GitHub account.
+
 # DevInt Cluster Creation
 
 ## Configure AWS CLI to use installer IAM credentials
