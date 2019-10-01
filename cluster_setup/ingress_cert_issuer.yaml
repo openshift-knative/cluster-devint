@@ -10,6 +10,7 @@ spec:
     statementEntries:
     - action:
       - route53:GetChange
+      - route53:ListHostedZones
       - route53:ListHostedZonesByName
       - route53:ChangeResourceRecordSets
       effect: Allow
