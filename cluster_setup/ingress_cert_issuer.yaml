@@ -110,15 +110,15 @@ data:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: create-letsencrypt-issuer
+  generateName: create-letsencrypt-cert-
   namespace: openshift-ingress
   annotations:
     argocd.argoproj.io/sync-wave: "3"
-    argocd.argoproj.io/hook: PostSync
-    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+    argocd.argoproj.io/hook: Sync
 spec:
   template:
     spec:
+      ttlSecondsAfterFinished: 600
       serviceAccountName: letsencrypt-issuer
       containers:
       - name: oc
