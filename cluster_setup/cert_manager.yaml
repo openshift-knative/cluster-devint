@@ -376,6 +376,6 @@ metadata:
     argocd.argoproj.io/sync-wave: "3"
 spec:
   channel: alpha
-  name: cert-manager-operator
+  name: cert-manager
   source: cert-manager-operator
   sourceNamespace: openshift-operator-lifecycle-manager
