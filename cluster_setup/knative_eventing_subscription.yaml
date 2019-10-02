@@ -1,0 +1,12 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: knative-eventing
+  namespace: openshift-operators
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+spec:
+  channel: alpha
+  name: knative-eventing-operator
+  source: devint-operators
+  sourceNamespace: openshift-operators
