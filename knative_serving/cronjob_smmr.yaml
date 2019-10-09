@@ -48,7 +48,6 @@ data:
     spec:
       members:
       - knative-serving
-    <SMMR_MEMBERS>
   sync_smmr.sh: |-
     KN_NAMESPACES=$(oc get route.serving.knative.dev --all-namespaces -o jsonpath="{range.items[*]}{.metadata.namespace}:{end}" | tr ":" "\n" | sort | uniq)
     SMMR_MEMBERS=$(for ns in $KN_NAMESPACES; do echo "  - $ns"; done)
