@@ -50,9 +50,9 @@ data:
       - knative-serving
     <SMMR_MEMBERS>
   sync_smmr.sh: |-
-    KSVC_NAMESPACES=$(oc get route.serving.knative.dev --all-namespaces -o jsonpath="{range.items[*]}{.metadata.namespace}:{end}" | tr ":" "\n" | sort | uniq)
-    SMMR_MEMBERS=$(for ns in $KSVC_NAMESPACES; do echo "  - $ns"; done)
-    cat smmr.yaml | sed -e "s/<SMMR_MEMBERS>/$SMMR_MEMBERS/" | oc apply -f -
+    KN_NAMESPACES=$(oc get route.serving.knative.dev --all-namespaces -o jsonpath="{range.items[*]}{.metadata.namespace}:{end}" | tr ":" "\n" | sort | uniq)
+    SMMR_MEMBERS=$(for ns in $KN_NAMESPACES; do echo "  - $ns"; done)
+    echo -e "$(cat smmr.yaml)\n$SMMR_MEMBERS" | oc apply -f -
 ---
 apiVersion: batch/v1beta1
 kind: CronJob
