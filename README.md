@@ -11,7 +11,30 @@ https://console-openshift-console.apps.devint.openshiftknativedemo.org
 and choose the `github` identity provider. Do the login dance with
 your GitHub account.
 
-# DevInt Cluster Creation
+# Using the DevInt Cluster
+
+Create a new project after logging in and deploy what you need. This
+is a shared cluster and does not have unlimited resources, so play
+nicely.
+
+The first time you deploy a Knative Service in a new namespace it may
+take up to a minute for it to become externally accessible. This delay
+should go away in future releases as we improve the Service Mesh
+integration with our Serverless Operator.
+
+# Suggesting changes to the DevInt Cluster
+
+The entire cluster is managed via [Argo
+CD](https://github.com/argoproj/argo-cd) from this repository. If
+you'd like a new operator installed on the cluster or anything else
+that needs cluster administrator permission to do, file an issue or PR
+in this repo with the desired change and someone will merge it after
+reviewing.
+
+Once merged the change will be live on the cluster within a few
+minutes.
+
+# DevInt Cluster Creation (only relevant for operations)
 
 ## Configure AWS CLI to use installer IAM credentials
 ```
