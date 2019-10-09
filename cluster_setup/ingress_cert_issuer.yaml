@@ -134,7 +134,7 @@ spec:
       volumes:
       - name: issuer-volume
         configMap:
-          defaultMode: 0700
+          defaultMode: 0777
           name: letsencrypt-issuer-volume
       restartPolicy: Never
 ---
