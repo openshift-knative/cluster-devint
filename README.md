@@ -1,15 +1,29 @@
 # Logging in to DevInt Cluster
 
-Make sure your GitHub user is a member of the
-openshift-knative/cluster-devint team at
-https://github.com/orgs/openshift-knative/teams/cluster-devint. Ping
-another member of that team to be added if you're not part of
-it.
+## GitHub Team Membership
+Access to the cluster is controlled by membership in the
+cluster-devint team of the openshift-knative GitHub
+Organization. Every new user will need to get invited to this team.
 
+Create an issue at
+https://github.com/openshift-knative/cluster-devint/issues to request
+access to this team and someone will invite you. A simple description
+such as "I work on the foo team at Red Hat and would like access to
+the openshift-knative devint cluster" will be enough for most cases. A
+human will verify your provided details before approval.
+
+
+## Web Console Access
 Go to
 https://console-openshift-console.apps.devint.openshiftknativedemo.org
 and choose the `github` identity provider. Do the login dance with
 your GitHub account.
+
+## Command Line Access
+After logging in to the web console, click the dropdown arrow next to
+your name in the top right corner and click "Copy Login Command". That
+will redirect you to another page where you click "Display Token" and
+the correct `oc login` command will be shown for your user.
 
 # Using the DevInt Cluster
 
