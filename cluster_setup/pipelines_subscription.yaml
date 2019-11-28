@@ -6,7 +6,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "2"
 spec:
-  channel: dev-preview
+  channel: canary
   name: openshift-pipelines-operator
   source: devint-operators
   sourceNamespace: openshift-operators
