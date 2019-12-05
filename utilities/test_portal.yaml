@@ -13,17 +13,26 @@ data:
 
         <style type="text/css">
           iframe {
-              width: 100%;
+              width: 90%;
+              margin-bottom: 3em;
           }
         </style>
       </head>
 
       <body>
-        <h2>OpenShift Knative</h2>
-        <iframe src="https://prow.svc.ci.openshift.org/?job=*knative*" style="height:600px"></iframe>
+        <h1>Serverless Test Portal</h1>
+
+        <h2>OpenShift Knative Periodic Jobs</h2>
+        <iframe src="https://prow.svc.ci.openshift.org/?type=periodic&job=*ci-openshift-knative*" style="height:600px"></iframe>
+
+        <h2>OpenShift Knative Postsubmit Jobs</h2>
+        <iframe src="https://prow.svc.ci.openshift.org/?type=postsubmit&job=*ci-openshift-knative*" style="height:600px"></iframe>
+
+        <h2>OpenShift Knative Mirror Jobs</h2>
+        <iframe src="https://prow.svc.ci.openshift.org/?type=periodic&job=*mirroring-knative*" style="height:400px"></iframe>
 
         <h2>Kourier in Knative</h2>
-        <iframe src="https://testgrid.knative.dev/serving#kourier-stable&width=20&embed-without-column-labels="></iframe>
+        <iframe src="https://testgrid.knative.dev/serving#kourier-stable&width=20&embed-without-column-labels=" style="height:100px"></iframe>
       </body>
     </html>
 ---
