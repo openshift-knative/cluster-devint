@@ -9,4 +9,4 @@ spec:
   channel: stable
   name: jaeger-product
   source: redhat-operators
-  sourceNamespace: openshift-operators
+  sourceNamespace: openshift-marketplace

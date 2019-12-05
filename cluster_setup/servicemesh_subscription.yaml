@@ -9,4 +9,4 @@ spec:
   channel: "1.0"
   name: servicemeshoperator
   source: redhat-operators
-  sourceNamespace: openshift-operators
+  sourceNamespace: openshift-marketplace

@@ -9,4 +9,4 @@ spec:
   channel: stable
   name: kiali-ossm
   source: redhat-operators
-  sourceNamespace: openshift-operators
+  sourceNamespace: openshift-marketplace

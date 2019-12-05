@@ -9,4 +9,4 @@ spec:
   channel: preview
   name: elasticsearch-operator
   source: redhat-operators
-  sourceNamespace: openshift-operators
+  sourceNamespace: openshift-marketplace

@@ -9,4 +9,4 @@ spec:
   channel: canary
   name: openshift-pipelines-operator
   source: redhat-operators
-  sourceNamespace: openshift-operators
+  sourceNamespace: openshift-marketplace
