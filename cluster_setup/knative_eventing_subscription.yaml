@@ -8,5 +8,5 @@ metadata:
 spec:
   channel: alpha
   name: knative-eventing-operator
-  source: devint-operators
+  source: community-operators
   sourceNamespace: openshift-operators

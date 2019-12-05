@@ -8,5 +8,5 @@ metadata:
 spec:
   channel: stable
   name: jaeger-product
-  source: devint-operators
+  source: redhat-operators
   sourceNamespace: openshift-operators

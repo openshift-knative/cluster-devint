@@ -8,5 +8,5 @@ metadata:
 spec:
   channel: "1.0"
   name: servicemeshoperator
-  source: devint-operators
+  source: redhat-operators
   sourceNamespace: openshift-operators

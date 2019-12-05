@@ -8,5 +8,5 @@ metadata:
 spec:
   channel: techpreview
   name: serverless-operator
-  source: devint-operators
+  source: redhat-operators
   sourceNamespace: openshift-operators

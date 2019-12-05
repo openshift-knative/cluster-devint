@@ -8,5 +8,5 @@ metadata:
 spec:
   channel: stable
   name: kiali-ossm
-  source: devint-operators
+  source: redhat-operators
   sourceNamespace: openshift-operators

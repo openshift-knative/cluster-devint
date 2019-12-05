@@ -8,5 +8,5 @@ metadata:
 spec:
   channel: canary
   name: openshift-pipelines-operator
-  source: devint-operators
+  source: redhat-operators
   sourceNamespace: openshift-operators

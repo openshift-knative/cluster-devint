@@ -8,5 +8,5 @@ metadata:
 spec:
   channel: preview
   name: elasticsearch-operator
-  source: devint-operators
+  source: redhat-operators
   sourceNamespace: openshift-operators
