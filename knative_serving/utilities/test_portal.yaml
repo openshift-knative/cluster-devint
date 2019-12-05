@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-portal-html
+  namespace: utilities
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+data:
+  index.html: |-
+    <html>
+      <head>
+        <title>Serverless Tests</title>
+
+        <style type="text/css">
+          iframe {
+              width: 100%;
+          }
+        </style>
+      </head>
+
+      <body>
+        <h2>OpenShift Knative</h2>
+        <iframe src="https://prow.svc.ci.openshift.org/?job=*knative*" style="height:600px"></iframe>
+
+        <h2>Kourier in Knative</h2>
+        <iframe src="https://testgrid.knative.dev/serving#kourier-stable&width=20&embed-without-column-labels="></iframe>
+      </body>
+    </html>
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: test-portal
+  namespace: utilities
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  template:
+    spec:
+      containers:
+      - name: user-container
+        image: quay.io/bitnami/nginx
+        volumeMounts:
+        - name: test-portal-html
+          mountPath: /app
+      volumes:
+      - name: test-portal-html
+        configMap:
+          name: test-portal-html

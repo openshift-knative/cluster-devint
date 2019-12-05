@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: utilities
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "6"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  project: default
+  source:
+    path: utilities
+    repoURL: https://github.com/openshift-knative/cluster-devint
+    targetRevision: master
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
