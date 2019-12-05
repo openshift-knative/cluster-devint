@@ -8,5 +8,5 @@ metadata:
 spec:
   channel: canary
   name: openshift-pipelines-operator
-  source: redhat-operators
+  source: community-operators
   sourceNamespace: openshift-marketplace
