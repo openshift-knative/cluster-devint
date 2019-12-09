@@ -32,7 +32,7 @@ data:
         <iframe src="https://prow.svc.ci.openshift.org/?type=periodic&job=*mirroring-knative*" style="height:400px"></iframe>
 
         <h2>Kourier in Knative</h2>
-        <iframe src="https://testgrid.knative.dev/serving#kourier-stable&width=20&embed-without-column-labels=" style="height:100px"></iframe>
+        <iframe src="https://testgrid.knative.dev/serving#kourier-stable&width=20&embed-without-column-labels=" style="height:400px"></iframe>
       </body>
     </html>
 ---
