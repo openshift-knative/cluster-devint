@@ -1,12 +1,23 @@
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorSource
+metadata:
+  name: rhpipeline-operators
+  namespace: openshift-marketplace
+spec:
+  type: appregistry
+  endpoint: https://quay.io/cnr
+  registryNamespace: rhpipeline
+  displayName: "rhpipeline Operators"
+  publisher: "rhpipeline"
+---
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
-  name: pipelines
+  name: rhpipeline-pipelines-subscription
   namespace: openshift-operators
-  annotations:
-    argocd.argoproj.io/sync-wave: "2"
 spec:
-  channel: canary
+  channel: experimental
   name: openshift-pipelines-operator
-  source: community-operators
+  source: rhpipeline-operators
   sourceNamespace: openshift-marketplace
