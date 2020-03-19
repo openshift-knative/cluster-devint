@@ -10,4 +10,4 @@ spec:
     tracing:
       backend: zipkin
       zipkin-endpoint: http://jaeger-collector.knative-serving.svc
-      sample-rate: 0.1
+      sample-rate: "0.1"
