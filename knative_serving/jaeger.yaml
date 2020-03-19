@@ -16,7 +16,3 @@ spec:
     options:
       memory:
         max-traces: 100000
-  agent:
-    strategy: DaemonSet
-  annotations:
-    scheduler.alpha.kubernetes.io/critical-pod: ""
