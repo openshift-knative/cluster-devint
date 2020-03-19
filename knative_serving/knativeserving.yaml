@@ -5,3 +5,9 @@ metadata:
  namespace: knative-serving
  annotations:
     argocd.argoproj.io/sync-wave: "3"
+spec:
+  config:
+    tracing:
+      backend: zipkin
+      zipkin-endpoint: http://jaeger-collector.knative-serving.svc
+      sample-rate: 0.1
