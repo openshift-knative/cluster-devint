@@ -1,0 +1,22 @@
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+ name: jaeger
+ namespace: knative-serving
+ annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  strategy: allInOne
+  allInOne:
+    image: registry.redhat.io/distributed-tracing/jaeger-all-in-one-rhel7:latest
+    options:
+      log-level: debug
+  storage:
+    type: memory
+    options:
+      memory:
+        max-traces: 100000
+  agent:
+    strategy: DaemonSet
+  annotations:
+    scheduler.alpha.kubernetes.io/critical-pod: ""
