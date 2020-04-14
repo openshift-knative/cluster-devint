@@ -31,11 +31,6 @@ Create a new project after logging in and deploy what you need. This
 is a shared cluster and does not have unlimited resources, so play
 nicely.
 
-The first time you deploy a Knative Service in a new namespace it may
-take up to a minute for it to become externally accessible. This delay
-should go away in future releases as we improve the Service Mesh
-integration with our Serverless Operator.
-
 # Suggesting changes to the DevInt Cluster
 
 The entire cluster is managed via [Argo
