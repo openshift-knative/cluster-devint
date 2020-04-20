@@ -1,21 +1,21 @@
-apiVersion: redhatcop.redhat.io/v1alpha1
-kind: NamespaceConfig
-metadata:
-  name: small-size
-  namespace: namespace-configuration-operator
-  annotations:
-    argocd.argoproj.io/sync-wave: "4"
-spec:
-  selector:
-    matchLabels:
-      size: small  
-  resources:
-  - apiVersion: v1
-    kind: ResourceQuota
-    metadata:
-      name: small-size  
-    spec:
-      hard:
-        pods: "10"
-        requests.cpu: "1"
-        requests.memory: 5Gi
+# apiVersion: redhatcop.redhat.io/v1alpha1
+# kind: NamespaceConfig
+# metadata:
+#   name: small-size
+#   namespace: namespace-configuration-operator
+#   annotations:
+#     argocd.argoproj.io/sync-wave: "4"
+# spec:
+#   selector:
+#     matchLabels:
+#       size: small  
+#   resources:
+#   - apiVersion: v1
+#     kind: ResourceQuota
+#     metadata:
+#       name: small-size  
+#     spec:
+#       hard:
+#         pods: "10"
+#         requests.cpu: "1"
+#         requests.memory: 5Gi
