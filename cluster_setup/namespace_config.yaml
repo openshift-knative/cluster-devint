@@ -17,7 +17,7 @@ spec:
     spec:
       hard:
         pods: "10"
-        requests.cpu: "1"
+        requests.cpu: 1100m
         requests.memory: 5Gi
   - apiVersion: v1
     kind: LimitRange
