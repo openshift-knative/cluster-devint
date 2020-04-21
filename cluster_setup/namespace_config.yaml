@@ -29,3 +29,35 @@ spec:
           cpu: 50m
           memory: 64Mi
         type: Container
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: NamespaceConfig
+metadata:
+  name: medium-size
+  namespace: namespace-configuration-operator
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+spec:
+  selector:
+    matchLabels:
+      size: medium  
+  resources:
+  - apiVersion: v1
+    kind: ResourceQuota
+    metadata:
+      name: medium-size  
+    spec:
+      hard:
+        pods: "20"
+        requests.cpu: 2200m
+        requests.memory: 10Gi
+  - apiVersion: v1
+    kind: LimitRange
+    metadata:
+      name: default-limit-range
+    spec:
+      limits:
+      - defaultRequest:
+          cpu: 50m
+          memory: 64Mi
+        type: Container
