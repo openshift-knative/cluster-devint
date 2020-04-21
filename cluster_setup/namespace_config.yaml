@@ -17,3 +17,15 @@ spec:
     spec:
       hard:
         pods: "10"
+        requests.cpu: "1"
+        requests.memory: 5Gi
+  - apiVersion: v1
+    kind: LimitRange
+    metadata:
+      name: default-limit-range
+    spec:
+      limits:
+      - defaultRequest:
+          cpu: 50m
+          memory: 64Mi
+        type: Container
