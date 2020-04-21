@@ -17,5 +17,3 @@ spec:
     spec:
       hard:
         pods: "10"
-        requests.cpu: "1"
-        requests.memory: 5Gi
