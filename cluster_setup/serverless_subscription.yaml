@@ -6,7 +6,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "4"
 spec:
-  channel: preview-4.3
+  channel: 4.3
   name: serverless-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
