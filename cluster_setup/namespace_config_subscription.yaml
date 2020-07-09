@@ -26,3 +26,5 @@ spec:
   name: namespace-configuration-operator
   source: community-operators
   sourceNamespace: openshift-marketplace
+  installPlanApproval: Manual
+  startingCSV: namespace-configuration-operator.v0.1.0
