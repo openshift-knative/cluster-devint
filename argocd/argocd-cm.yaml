@@ -26,7 +26,7 @@ data:
       health.lua: |
         hs = {}
         if obj.status ~= nil then
-          if obj.status.state == "AtLatestKnown" and obj.status.installedCSV ~= nil then
+          if (obj.status.state == "AtLatestKnown" || obj.status.state == "UpgradePending") and obj.status.installedCSV ~= nil then
             hs.status = "Healthy"
             hs.message = ""
             return hs
